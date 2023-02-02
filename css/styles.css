@@ -15,4 +15,38 @@
   .recipe-details{
     border-right: 2px solid #dbe4ed;
   }
+
+.jumbotron {
+    padding: 2rem 1rem;
+    background-color: #e9ecef;
+    border-radius: .3rem;
+  }
+  .result {
+    border: 1px solid lightgray;
+    height: auto;
+    border-radius: 0.7rem;
+    -webkit-border-radius: 0.7rem;
+    -moz-border-radius: 0.7rem;
+    -ms-border-radius: 0.7rem;
+    -o-border-radius: 0.7rem;
+    height: auto;
+}
+.tab-pane {
+    width: calc(100vw - 80px);
+    margin-left: 30px;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.card-one {
+    margin-left: -.4%;
+    margin-right: .6%;
+
+}
+
+.hide{
+display: none;
 }
