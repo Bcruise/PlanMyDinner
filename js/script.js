@@ -1,5 +1,5 @@
 const apiKey = "9973533";
-const ingredientsInput = $('#mealUserInput'); //{NEED INPUT ID}
+const ingredientsInput = $('#mealUserInput');
 const modelID = $(''); //{NEED MODAL ID}
 const mealResultsCont = $('#mealResultsContainer');
 const ingredientsCont = $('#ingredientsContainer');
@@ -11,6 +11,7 @@ var ingredients = [];
 function getMeals() {
     let baseURL = `https://www.themealdb.com/api/json/v2/${apiKey}/filter.php?i=${ingredients}`;
     getData(baseURL, 'Meals');
+
 }
 
 //function to get recipe details
@@ -25,15 +26,13 @@ function getData(queryURL, type) {
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        if (type == "Meals") {
-            return response;
-        }
-        if (type == "Recipe") {
-
+        if(type == "Meals"){
+            
+            showMeals(response);
         }
         //testing
-        console.log(type);
-        console.log(response);
+        // console.log(type);
+        // console.log(response);
     });
 
 }
@@ -53,7 +52,7 @@ function popModal(id) {
     let meal = getRecipe(id);
 }
 
-//function to add ingridient to page
+//function to add ingredient to page
 function addIngredientToPage(item) {
 
     //create html
@@ -64,7 +63,31 @@ function addIngredientToPage(item) {
             </div>
         </div>`;
     //append to container
-    ingredientsCont.append(html);
+    ingredientsCont.prepend(html);
+
+}
+
+//function to show meal results
+function showMeals(data) {
+
+    mealResultsCont.html('');
+    //get meal data
+    for(i= 0; i< data.meals.length; i++){
+        let id = data.meals[i].idMeal;
+    let title = data.meals[i].strMeal;
+    let image = data.meals[i].strMealThumb;
+    //create html
+    let html =
+        `<div class="card col-6 mt-2 card-one">
+        <img src="${image}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <span>${title}</span>
+        </div>
+    </div>`;
+    //append to container
+    mealResultsCont.append(html);
+    }
+    
 
 }
 
@@ -77,7 +100,9 @@ function clickHandler(button) {
         addIngredient(item);
         addIngredientToPage(item);
         ingredientsInput.val('');
+        getMeals();
         
+
     }
     //if search btn clicked
     if (button.data('button') == 'search') {
@@ -91,8 +116,8 @@ function clickHandler(button) {
 }
 
 //testing
-getMeals();
-getRecipe('52772');
+// getMeals();
+// getRecipe('52772');
 
 
 //click listener for all buttons
@@ -104,19 +129,3 @@ $('body').on('click', function (event) {
 
 
 
-
-// //get meal data
-// let data = getMeals();
-// let id = data.meals[0].idMeal;
-// let title = data.meals[0].strMeal;
-// let image = data.meals[0].strMealThumb;
-// //create html
-// let html = 
-// `<div class="card col-6 mt-2 card-one">
-//     <img src="${image}" class="card-img-top" alt="...">
-//     <div class="card-body">
-//         <span>${title}</span>
-//     </div>
-// </div>`;
-// //append to container
-// mealResultsCont.append(html);
