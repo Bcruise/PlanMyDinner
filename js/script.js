@@ -6,6 +6,8 @@ const ingredientsCont = $('#ingredientsContainer');
 
 //array to hold user input
 var ingredients = [];
+//array to hold all the ingredients name
+var ingredientsName = [];
 
 //function to get meals
 function getMeals() {
@@ -120,3 +122,28 @@ $('body').on('click', function (event) {
 // </div>`;
 // //append to container
 // mealResultsCont.append(html);
+
+
+//URL for getting all the ingredients
+var queryURL = "https://themealdb.com/api/json/v1/1/list.php?i=list";
+
+//Ajax call to get all ingredients
+$.ajax({
+    url: queryURL,
+    method: "GET"
+})
+.then(function(response){
+    //For loop, get ingredients name and store in ingredientsName array
+    for (let i = 1; i < response.meals.length; i++)
+    {
+        ingredientsName.push(response.meals[i].strIngredient)
+    }
+    
+});
+
+//JQuery UI Autocomplete with the lists
+$(function(){
+    $("#mealUserInput").autocomplete({
+      source: ingredientsName 
+    });
+  } );
