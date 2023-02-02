@@ -1,0 +1,18 @@
+.recipe-photo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ 
+.recipe-instructions h6,
+.recipe-details h6 {
+  border-bottom:2px solid #dbe4ed;
+}
+
+/*Media query for devices smaller than tablets 76px and down)*/
+@media (min-width: 768px) {  
+  /*Grey border dividing the modal to recipe details and photo of the recipe*/
+  .recipe-details{
+    border-right: 2px solid #dbe4ed;
+  }
+}
