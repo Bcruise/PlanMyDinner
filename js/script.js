@@ -80,7 +80,8 @@ function showMeals(data) {
     let image = data.meals[i].strMealThumb;
     //create html
     let html =
-        `<div class="card col-6 mt-2 card-one">
+    
+        `<div class="card col-5 m-3 card-one">
         <img src="${image}" class="card-img-top" alt="...">
         <div class="card-body">
             <span>${title}</span>
