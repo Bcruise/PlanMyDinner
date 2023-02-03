@@ -1,6 +1,5 @@
 const apiKey = "9973533";
 const ingredientsInput = $('#mealUserInput');
-const modelID = $(''); //{NEED MODAL ID}
 const mealResultsCont = $('#mealResultsContainer');
 const ingredientsCont = $('#ingredientsContainer');
 
@@ -52,6 +51,7 @@ function addIngredient(item) {
 //function to open model and populate
 function popModal(id) {
     let meal = getRecipe(id);
+    console.log('yes: '+id)
 }
 
 //function to add ingredient to page
@@ -86,10 +86,10 @@ function showMeals(data) {
         //create html
         let html =
         
-             `<div class="card col-sm-8 col-md-5 col-lg-3 m-3 p-2 card-one" data-button="meal" data-id="${id}">
-        <img src="${image}" class="card-img-top" alt="${title}">
-        <div class="card-body">
-            <span>${title}</span>
+             `<div class="card col-sm-8 col-md-5 col-lg-3 m-3 p-2 card-one" data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
+        <img src="${image}" class="card-img-top" alt="${title}" data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
+        <div class="card-body" data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
+            <span data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">${title}</span>
          </div>
          </div>`;
         //append to container
@@ -124,14 +124,6 @@ function clickHandler(button) {
             getMeals();
         }
     }
-
- 
-    //if search btn clicked
-    if (button.data('button') == 'search') {
-        getMeals();
-    }
-
-
     //if meal item clicked
     if (button.data('button') == 'meal') {
         popModal(button.data('id'));
