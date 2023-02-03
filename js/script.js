@@ -55,16 +55,18 @@ function addIngredient(item) {
 //function to open model and populate
 function popModal(data) {
 
-    console.log(data);
+    //get elements
     let title = $('#mealTitle');
     let ingredients = $('#mealIngredients');
     let instructions = $('#mealInstructions');
     let image = $('#mealImage');
     let youTube = $('#youTube');
 
+    //arrays to hold ingredient information
     let ingredientsArray = [];
-    let measureArray = []
+    let measureArray = [];
 
+    //iterate through array to find ingredients and measures
     for (const [key, value] of Object.entries(data.meals[0])) {
 
         if(key.startsWith('strIngredient') && (value != null && value != '')){
@@ -77,13 +79,13 @@ function popModal(data) {
     }
 
     let ingredientList = '';
-
+    //combine ingredients and measures into a string
     for( i=0; i < ingredientsArray.length; i++){
         let item = measureArray[i] + ': ' + ingredientsArray[i]+ '<br/>';
         ingredientList += item;
     }
 
-    
+    //set elements in modal
     title.html(data.meals[0].strMeal);
     instructions.html(data.meals[0].strInstructions.replace(/\./g,'.<br/>'));
     ingredients.html(ingredientList);
@@ -126,7 +128,7 @@ function showMeals(data) {
         //create html
         let html =
         
-             `<div class="card col-sm-8 col-md-5 col-lg-3 m-3 p-2 card-one" data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
+             `<div id="card" class="card col-sm-8 col-md-5 col-lg-3 m-3 p-2 card-one" data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
         <img src="${image}" class="card-img-top" alt="${title}" data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
         <div class="card-body" data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
             <span data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">${title}</span>
@@ -134,6 +136,7 @@ function showMeals(data) {
          </div>`;
         //append to container
         mealResultsCont.append(html);
+        
         }
     }
     //If there is no result then show this card with this img src
@@ -146,6 +149,7 @@ function showMeals(data) {
         mealResultsCont.append(html);
         
     }
+    
 }
 
 //function to handle clicks
