@@ -21,6 +21,28 @@
     padding: 2rem 1rem;
     background-color: #e9ecef;
     border-radius: .3rem;
+    background-image: url("../images/banner.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    height: 400px;
+   
+  }
+
+  .myText-center{
+    position: absolute;
+    top: 200px
+    
+  }
+  .display-4   {
+    font-size: 50px !important;
+    font-weight: 500 !important;
+    color: black;
+  }
+
+  .lead{
+    font-weight: 25px !important;
+    font-weight: 250 !important;
   }
   .result {
     border: 1px solid lightgray;
