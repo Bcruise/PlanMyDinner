@@ -73,40 +73,57 @@ function addIngredientToPage(item) {
 function showMeals(data) {
 
     mealResultsCont.html('');
-    //get meal data
-    for(i= 0; i< data.meals.length; i++){
-        let id = data.meals[i].idMeal;
-    let title = data.meals[i].strMeal;
-    let image = data.meals[i].strMealThumb;
-    //create html
-    let html =
-    
-        `<div class="card col-5 m-3 card-one">
-        <img src="${image}" class="card-img-top" alt="...">
-        <div class="card-body">
-            <span>${title}</span>
-        </div>
-    </div>`;
-    //append to container
-    mealResultsCont.append(html);
-    }
-    
 
+    //If data response is not equal to null then show the card recipes.
+    //Unable to use length as cannot read property of ‘length’ if null
+    if (data.meals != null){
+
+        //get meal data
+        for(i= 0; i< data.meals.length; i++){
+            let id = data.meals[i].idMeal;
+        let title = data.meals[i].strMeal;
+        let image = data.meals[i].strMealThumb;
+        //create html
+        let html =
+        
+            `<div class="card col-5 m-3 card-one">
+            <img src="${image}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <span>${title}</span>
+            </div>
+        </div>`;
+        //append to container
+        mealResultsCont.append(html);
+        }
+    }
+    //If there is no result then show this card with this img src
+    else{
+        let html =
+        `<div class="card col-5 m-3 card-one">
+        <img src="/images/no-results-found.png" class="card-img-top" alt="...">
+        </div>`;
+        //append to container
+        mealResultsCont.append(html);
+    }
 }
 
 //function to handle clicks
 function clickHandler(button) {
     //if add ingridients btn clicked
     if (button.data('button') == 'add' && ingredientsInput.val() != '') {
-
-        let item = ingredientsInput.val()
-        addIngredient(item);
-        addIngredientToPage(item);
-        ingredientsInput.val('');
-        getMeals();
-        
-
+        //If the ingredient chosen is not in the list of ingredients from API
+        if (!ingredientsName.includes(ingredientsInput.val())){
+            ingredientsInput.val('Sorry ingredient not available');
+        }
+        else{
+            let item = ingredientsInput.val()
+            addIngredient(item);
+            addIngredientToPage(item);
+            ingredientsInput.val('');
+            getMeals();
+        }
     }
+    
     //if search btn clicked
     if (button.data('button') == 'search') {
         getMeals();
