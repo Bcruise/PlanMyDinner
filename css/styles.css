@@ -1,3 +1,6 @@
+body{
+  overflow: hidden;
+}
 .recipe-photo{
   display: flex;
   align-items: center;
@@ -21,6 +24,21 @@
     padding: 2rem 1rem;
     background-color: #e9ecef;
     border-radius: .3rem;
+    background-image: url("../images/banner.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+   
+  }
+  .display-4   {
+    font-size: 50px !important;
+    font-weight: 500 !important;
+    color: black;
+  }
+
+  .lead{
+    font-weight: 25px !important;
+    font-weight: 250 !important;
   }
   .result {
     border: 1px solid lightgray;
@@ -30,7 +48,21 @@
     -moz-border-radius: 0.7rem;
     -ms-border-radius: 0.7rem;
     -o-border-radius: 0.7rem;
-    height: auto;
+    overflow-y: scroll;
+    height: calc(100vh - 260px);
+}
+.result::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: transparent;  
+}
+.result::-webkit-scrollbar {
+  width: 5px;
+  padding-right: 5px;
+  background-color: transparent;
+}
+.result::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #8f8e8e5b;
 }
 .tab-pane {
     width: calc(100vw - 80px);
@@ -38,12 +70,28 @@
 }
 
 .card-container {
+    padding-top: 20px;
     display: flex;
     flex-direction: row;
 }
 
-.card-one {
-
+.card-one img {
+  border-radius: 0.4rem;
+  -webkit-border-radius: 0.4rem;
+  -moz-border-radius: 0.4rem;
+  -ms-border-radius: 0.4rem;
+  -o-border-radius: 0.4rem;
+}
+.card{
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+}
+.card:hover{
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
 .hide{

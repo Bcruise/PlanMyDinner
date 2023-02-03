@@ -86,12 +86,12 @@ function showMeals(data) {
         //create html
         let html =
         
-            `<div class="card col-5 m-3 card-one">
-            <img src="${image}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <span>${title}</span>
-            </div>
-        </div>`;
+             `<div class="card col-sm-8 col-md-5 col-lg-3 m-3 p-2 card-one" data-button="meal" data-id="${id}">
+        <img src="${image}" class="card-img-top" alt="${title}">
+        <div class="card-body">
+            <span>${title}</span>
+         </div>
+         </div>`;
         //append to container
         mealResultsCont.append(html);
         }
@@ -104,6 +104,7 @@ function showMeals(data) {
         </div>`;
         //append to container
         mealResultsCont.append(html);
+        
     }
 }
 
@@ -123,11 +124,14 @@ function clickHandler(button) {
             getMeals();
         }
     }
-    
+
+ 
     //if search btn clicked
     if (button.data('button') == 'search') {
         getMeals();
     }
+
+
     //if meal item clicked
     if (button.data('button') == 'meal') {
         popModal(button.data('id'));
