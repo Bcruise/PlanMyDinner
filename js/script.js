@@ -31,6 +31,10 @@ function getData(queryURL, type) {
             
             showMeals(response);
         }
+        if(type == "Recipe"){
+
+            popModal(response);
+        }
         //testing
         // console.log(type);
         // console.log(response);
@@ -49,9 +53,45 @@ function addIngredient(item) {
 
 }
 //function to open model and populate
-function popModal(id) {
-    let meal = getRecipe(id);
-    console.log('yes: '+id)
+function popModal(data) {
+
+    console.log(data);
+    let title = $('#mealTitle');
+    let ingredients = $('#mealIngredients');
+    let instructions = $('#mealInstructions');
+    let image = $('#mealImage');
+    let youTube = $('#youTube');
+
+    let ingredientsArray = [];
+    let measureArray = []
+
+    for (const [key, value] of Object.entries(data.meals[0])) {
+
+        if(key.startsWith('strIngredient') && (value != null && value != '')){
+            ingredientsArray.push(value);
+        }
+        if(key.startsWith('strMeasure') && (value != '' && value != 'undefined') ){
+            measureArray.push(`<span class="measure">${value}</span>`);
+            
+        }
+    }
+
+    let ingredientList = '';
+
+    for( i=0; i < ingredientsArray.length; i++){
+        let item = measureArray[i] + ': ' + ingredientsArray[i]+ '<br/>';
+        ingredientList += item;
+    }
+
+    
+    title.html(data.meals[0].strMeal);
+    instructions.html(data.meals[0].strInstructions.replace(/\./g,'.<br/>'));
+    ingredients.html(ingredientList);
+    image.attr('src',data.meals[0].strMealThumb);
+    youTube.attr('href', data.meals[0].strYoutube);
+
+
+    
 }
 
 //function to add ingredient to page
@@ -126,7 +166,7 @@ function clickHandler(button) {
     }
     //if meal item clicked
     if (button.data('button') == 'meal') {
-        popModal(button.data('id'));
+        getRecipe(button.data('id'));
     }
 
 }
@@ -138,7 +178,10 @@ function clickHandler(button) {
 
 //click listener for all buttons
 $('body').on('click', function (event) {
-    event.preventDefault();
+    //allow default youtube link action
+    if(event.target.id != "youTube"){
+        event.preventDefault();
+    }
     clickHandler($(event.target));
 });
 
