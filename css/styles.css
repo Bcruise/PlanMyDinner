@@ -1,5 +1,8 @@
 body{
-  overflow: hidden;  
+
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+
 }
 .recipe-photo{
   display: flex;
@@ -10,6 +13,73 @@ body{
 .recipe-instructions h6,
 .recipe-details h6 {
   border-bottom:2px solid #dbe4ed;
+}
+#mealInstructions{
+  overflow-y: auto;
+  max-height: 400px;
+  line-height: 2;
+  font-size: 15px;
+}
+#mealIngredients{
+  column-count: 3;
+  font-size: 14px;
+}
+.measure{
+  font-weight: 500;
+}
+#youTube{
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  height: 40px;
+  width: 130px;
+  cursor: pointer;
+  background-image: url('../images/youTube.jpg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+}
+#youTube:hover{
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+}
+.btn-new{
+  background-color: white;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  color: #333333;
+  transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+}
+
+.btn-new:hover{
+  background-color: white;
+  color: black;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+.nav-link {
+  color: #f73939;
+}
+.modal-footer{
+  justify-content: space-between !important;
+}
+.nav-pills .nav-link.active{
+  background-color: #f73939 !important;
+}
+.nav-pills {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px !important;
+
 }
 
 /*Media query for devices smaller than tablets 76px and down)*/
@@ -40,7 +110,6 @@ body{
     color: white;
   }
   .result {
-    border: 1px solid lightgray;
     height: auto;
     border-radius: 0.7rem;
     -webkit-border-radius: 0.7rem;
@@ -50,15 +119,18 @@ body{
     overflow-y: scroll;
     height: calc(100vh - 260px);
 }
+#mealInstructions::-webkit-scrollbar-track ,
 .result::-webkit-scrollbar-track {
   border-radius: 10px;
   background-color: transparent;  
 }
+#mealInstructions::-webkit-scrollbar,
 .result::-webkit-scrollbar {
   width: 5px;
   padding-right: 5px;
   background-color: transparent;
 }
+#mealInstructions::-webkit-scrollbar-thumb,
 .result::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #8f8e8e5b;
@@ -102,11 +174,24 @@ body{
   -o-border-radius: 0.4rem;
 }
 .card{
+  
   transition: all 0.5s ease;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
+  
+}
+#card{
+  animation-duration: 0.5s;
+  animation-name: animate-fade;
+  animation-delay: 0.2s;
+  animation-fill-mode: backwards;
+}
+
+@keyframes animate-fade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 .card:hover{
   cursor: pointer;
