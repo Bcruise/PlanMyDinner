@@ -31,6 +31,10 @@ function getData(queryURL, type) {
             
             showMeals(response);
         }
+        if(type == "Recipe"){
+
+            popModal(response);
+        }
         //testing
         // console.log(type);
         // console.log(response);
@@ -49,9 +53,47 @@ function addIngredient(item) {
 
 }
 //function to open model and populate
-function popModal(id) {
-    let meal = getRecipe(id);
-    console.log('yes: '+id)
+function popModal(data) {
+
+    //get elements
+    let title = $('#mealTitle');
+    let ingredients = $('#mealIngredients');
+    let instructions = $('#mealInstructions');
+    let image = $('#mealImage');
+    let youTube = $('#youTube');
+
+    //arrays to hold ingredient information
+    let ingredientsArray = [];
+    let measureArray = [];
+
+    //iterate through array to find ingredients and measures
+    for (const [key, value] of Object.entries(data.meals[0])) {
+
+        if(key.startsWith('strIngredient') && (value != null && value != '')){
+            ingredientsArray.push(value);
+        }
+        if(key.startsWith('strMeasure') && (value != '' && value != 'undefined') ){
+            measureArray.push(`<span class="measure">${value}</span>`);
+            
+        }
+    }
+
+    let ingredientList = '';
+    //combine ingredients and measures into a string
+    for( i=0; i < ingredientsArray.length; i++){
+        let item = measureArray[i] + ': ' + ingredientsArray[i]+ '<br/>';
+        ingredientList += item;
+    }
+
+    //set elements in modal
+    title.html(data.meals[0].strMeal);
+    instructions.html(data.meals[0].strInstructions.replace(/\./g,'.<br/>'));
+    ingredients.html(ingredientList);
+    image.attr('src',data.meals[0].strMealThumb);
+    youTube.attr('href', data.meals[0].strYoutube);
+
+
+    
 }
 
 //function to add ingredient to page
@@ -86,7 +128,7 @@ function showMeals(data) {
         //create html
         let html =
         
-             `<div class="card col-sm-8 col-md-5 col-lg-3 m-3 p-2 card-one" data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
+             `<div id="card" class="card col-sm-8 col-md-5 col-lg-3 m-3 p-2 card-one" data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
         <img src="${image}" class="card-img-top" alt="${title}" data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
         <div class="card-body" data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
             <span data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">${title}</span>
@@ -94,6 +136,7 @@ function showMeals(data) {
          </div>`;
         //append to container
         mealResultsCont.append(html);
+        
         }
     }
     //If there is no result then show this card with this img src
@@ -106,6 +149,7 @@ function showMeals(data) {
         mealResultsCont.append(html);
         
     }
+    
 }
 
 //function to handle clicks
@@ -126,7 +170,7 @@ function clickHandler(button) {
     }
     //if meal item clicked
     if (button.data('button') == 'meal') {
-        popModal(button.data('id'));
+        getRecipe(button.data('id'));
     }
 
 }
@@ -138,7 +182,10 @@ function clickHandler(button) {
 
 //click listener for all buttons
 $('body').on('click', function (event) {
-    event.preventDefault();
+    //allow default youtube link action
+    if(event.target.id != "youTube"){
+        event.preventDefault();
+    }
     clickHandler($(event.target));
 });
 
