@@ -134,12 +134,10 @@ function showCocktail (data) {
     
     let cocktailImage = data.drinks[0].strDrinkThumb;
     let cocktailTitle = data.drinks[0].strDrink;
-    let cocktailCategory = `<div class="category-div">
-                                <span>Category</span>
+    let cocktailCategory = `<div class="cocktail-category">
                                 <p>${data.drinks[0].strCategory}</p>
                             </div>`
-    let instructions = `<div class="instructions-div">
-                            <span>Instructions</span>
+    let instructions = `<div>
                             <p>${data.drinks[0].strInstructions}</p>
                         </div>`
     let ingredientsHTML = '';
@@ -150,7 +148,9 @@ function showCocktail (data) {
         if (ingredient == null || ingredient == undefined || volume == null || volume == undefined) {
             a = 16;
         } else {
-            ingredientsHTML += `<li>${ingredient}</li>`;
+
+            ingredientsHTML += `<span class="each-ingredient">${ingredient} - ${volume}</span>`;
+
         }
     }
 
@@ -160,12 +160,18 @@ function showCocktail (data) {
                 <div class="col-lg-4 col-md-12">
                     
                     <ul class="cocktail-details" id="cocktail-details">
-                        <h3 class="cocktail-header">${cocktailTitle}</h3>
-                        <span>${cocktailCategory}</span>
+
+                        <div class="cocktail-header-container">
+                            <h3 class="cocktail-header">${cocktailTitle}</h3>
+                        </div>
+                        <span class="category-span">Category</span>
+                        ${cocktailCategory}
                         <span class="ingredients-span">Ingredients</span>
                         ${ingredientsHTML}
-                        <span>${instructions}</span>
-                        </ul>
+                        <p class="space"></p>
+                        <span class="instructions-span">Instructions</span>
+                        ${instructions}
+                     </ul>
                 </div>
                 `;
 
@@ -247,11 +253,8 @@ function clickHandler(button) {
 
 
 //click listener for all buttons
-$('body').on('click', function (event) {
-    //allow default youtube link action
-    if(event.target.id != "youTube"){
-        event.preventDefault();
-    }
+$('button').on('click', function (event) {
+    event.preventDefault();
     clickHandler($(event.target));
 });
 
