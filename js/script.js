@@ -69,6 +69,61 @@ function addIngredientToPage(item) {
 
 }
 
+<<<<<<< Updated upstream
+=======
+//function to add cocktail to page
+
+function showCocktail (data) {
+    
+    cocktailRow.html('');
+    
+    let cocktailImage = data.drinks[0].strDrinkThumb;
+    let cocktailTitle = data.drinks[0].strDrink;
+    let cocktailCategory = `<div class="cocktail-category">
+                                <p>${data.drinks[0].strCategory}</p>
+                            </div>`
+    let instructions = `<div>
+                            <p>${data.drinks[0].strInstructions}</p>
+                        </div>`
+    let ingredientsHTML = '';
+
+    for (let a = 1; a < 16; a++) {
+        let ingredient = data.drinks[0][`strIngredient${a}`];
+        let volume = data.drinks[0][`strMeasure${a}`];
+        if (ingredient == null || ingredient == undefined || volume == null || volume == undefined) {
+            a = 16;
+        } else {
+            ingredientsHTML += `<span class="each-ingredient">${ingredient} - ${volume}</span>`;
+        }
+    }
+
+    let html = `<div class="col-lg-8 col-md-12">
+                    <img class="cocktail-image" src="${cocktailImage}" alt="cocktail-image">
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    
+                    <ul class="cocktail-details" id="cocktail-details">
+                        <div class="cocktail-header-container">
+                            <h3 class="cocktail-header">${cocktailTitle}</h3>
+                        </div>
+                        <span class="category-span">Category</span>
+                        ${cocktailCategory}
+                        <span class="ingredients-span">Ingredients</span>
+                        ${ingredientsHTML}
+                        <p class="space"></p>
+                        <span class="instructions-span">Instructions</span>
+                        ${instructions}
+                        </ul>
+                </div>
+                `;
+
+    cocktailRow.append(html);
+}
+
+// pushing of cocktail information onto pages
+getCocktail();
+
+>>>>>>> Stashed changes
 //function to show meal results
 function showMeals(data) {
 
@@ -145,7 +200,7 @@ function clickHandler(button) {
 
 
 //click listener for all buttons
-$('body').on('click', function (event) {
+$('button').on('click', function (event) {
     event.preventDefault();
     clickHandler($(event.target));
 });

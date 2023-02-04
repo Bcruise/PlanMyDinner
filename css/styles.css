@@ -1,5 +1,9 @@
 body{
+<<<<<<< Updated upstream
   overflow: hidden;
+=======
+  padding-bottom: 20px;
+>>>>>>> Stashed changes
 }
 .recipe-photo{
   display: flex;
@@ -49,7 +53,6 @@ body{
     -ms-border-radius: 0.7rem;
     -o-border-radius: 0.7rem;
     overflow-y: scroll;
-    height: calc(100vh - 260px);
 }
 .result::-webkit-scrollbar-track {
   border-radius: 10px;
@@ -96,4 +99,75 @@ body{
 
 .hide{
 display: none;
+<<<<<<< Updated upstream
+=======
+}
+
+.cocktail-details {
+  border: 2px solid lightblue;
+  height: 61.304vw;
+  color: black;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 7%;
+}
+
+.cocktail-image {
+  background-size: 100%;
+  height: 61.304vw;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.cocktail-details span {
+  margin-top: 20px;
+}
+
+.category-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.category-span, .instructions-span {
+  margin-bottom: 10px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.instructions-span {
+  margin-top: -10px;
+}
+
+.ingredients-span {
+  font-weight: 700;
+  text-decoration: underline;
+  margin-bottom: -5px;
+} 
+
+.cocktail-category {
+  margin-bottom: -10px;
+}
+
+.each-ingredient {
+  margin-bottom: -10px;
+}
+
+.cocktail-header {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+#cocktail-row {
+  margin-top: 20px;
+}
+
+.cocktail-header-container {
+  border: 2px solid black;
+  background-color: lightblue;
+  width: 100%;
+  padding-top: 20px;
+  margin-bottom: 10px;
+>>>>>>> Stashed changes
 }
