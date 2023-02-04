@@ -2,6 +2,7 @@ const apiKey = "9973533";
 const ingredientsInput = $('#mealUserInput');
 const mealResultsCont = $('#mealResultsContainer');
 const ingredientsCont = $('#ingredientsContainer');
+const cocktailRow = $('#cocktail-row');
 
 //array to hold user input
 var ingredients = [];
@@ -21,6 +22,13 @@ function getRecipe(id) {
     getData(baseURL, 'Recipe');
 }
 
+
+//function to get cocktails details
+function getCocktail(id) {
+    let baseURL = `https://www.thecocktaildb.com/api/json/v1/1/random.php`;
+    getData(baseURL, "Cocktail");
+}
+
 //function to call ajax request
 function getData(queryURL, type) {
     $.ajax({
@@ -31,13 +39,19 @@ function getData(queryURL, type) {
             
             showMeals(response);
         }
+        if(type == "Cocktail"){
+        
+        showCocktail(response);
+         
+        }
         if(type == "Recipe"){
 
             popModal(response);
         }
+
         //testing
         // console.log(type);
-        // console.log(response);
+         console.log(response);
     });
 
 }
@@ -97,6 +111,7 @@ function popModal(data) {
 }
 
 //function to add ingredient to page
+
 function addIngredientToPage(item) {
 
     //create html
@@ -110,6 +125,55 @@ function addIngredientToPage(item) {
     ingredientsCont.prepend(html);
 
 }
+
+//function to add cocktail to page
+
+function showCocktail (data) {
+    
+    cocktailRow.html('');
+    
+    let cocktailImage = data.drinks[0].strDrinkThumb;
+    let cocktailTitle = data.drinks[0].strDrink;
+    let cocktailCategory = `<div class="category-div">
+                                <span>Category</span>
+                                <p>${data.drinks[0].strCategory}</p>
+                            </div>`
+    let instructions = `<div class="instructions-div">
+                            <span>Instructions</span>
+                            <p>${data.drinks[0].strInstructions}</p>
+                        </div>`
+    let ingredientsHTML = '';
+
+    for (let a = 1; a < 16; a++) {
+        let ingredient = data.drinks[0][`strIngredient${a}`];
+        let volume = data.drinks[0][`strMeasure${a}`];
+        if (ingredient == null || ingredient == undefined || volume == null || volume == undefined) {
+            a = 16;
+        } else {
+            ingredientsHTML += `<li>${ingredient}</li>`;
+        }
+    }
+
+    let html = `<div class="col-lg-8 col-md-12">
+                    <img class="cocktail-image" src="${cocktailImage}" alt="cocktail-image">
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    
+                    <ul class="cocktail-details" id="cocktail-details">
+                        <h3 class="cocktail-header">${cocktailTitle}</h3>
+                        <span>${cocktailCategory}</span>
+                        <span class="ingredients-span">Ingredients</span>
+                        ${ingredientsHTML}
+                        <span>${instructions}</span>
+                        </ul>
+                </div>
+                `;
+
+    cocktailRow.append(html);
+}
+
+// pushing of cocktail information onto pages
+getCocktail();
 
 //function to show meal results
 function showMeals(data) {
@@ -154,6 +218,8 @@ function showMeals(data) {
 
 //function to handle clicks
 function clickHandler(button) {
+    //ajax call again for cocktail information
+    getCocktail();
     //if add ingridients btn clicked
     if (button.data('button') == 'add' && ingredientsInput.val() != '') {
         //If the ingredient chosen is not in the list of ingredients from API
