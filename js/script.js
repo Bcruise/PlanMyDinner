@@ -234,6 +234,16 @@ function showMeals(data) {
     }
     
 }
+function changeStyle(page){
+    var tabContent = $('.tab-content');
+    if(page == 'cocktail'){
+        tabContent.css("background-image", "linear-gradient(to bottom, rgba(0,0,0,0.9), white 95%)");
+        
+    }
+    if(page == 'meals'){
+        tabContent.css("background-image", "linear-gradient(to bottom, white, white 95%)");
+    }
+}
 
 //function to handle clicks
 function clickHandler(button) {
@@ -258,7 +268,11 @@ function clickHandler(button) {
     }
     //cocktail button pressesd
     if (button.data('button') == 'cocktail') {
+        changeStyle('cocktail');
         getCocktail();
+    }
+    if (button.data('button') == 'meals') {
+        changeStyle('meals');
     }
 
 }
@@ -303,3 +317,4 @@ $(function(){
     });
   } );
 
+  changeStyle('meals');
