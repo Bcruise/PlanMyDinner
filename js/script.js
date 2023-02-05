@@ -29,6 +29,19 @@ function getCocktail(id) {
     getData(baseURL, "Cocktail");
 }
 
+//JS to provide a scroll bar to just the cocktail section
+var pillsProfileTab = $('#pills-profile-tab');
+pillsProfileTab.on('click', function () {
+    if (pillsProfileTab[0].ariaSelected != true) {
+        //$("body").css("overflow", "scroll");
+        console.log(1);
+    } else {
+        //$("body").css("overflow", "hidden");
+        console.log(2);
+        console.log(pillsProfileTab[0].ariaSelected);
+    }
+})
+
 //function to call ajax request
 function getData(queryURL, type) {
     $.ajax({
@@ -178,7 +191,7 @@ function showCocktail (data) {
     cocktailRow.append(html);
 }
 
-// pushing of cocktail information onto pages
+// pushing of cocktail information onto page
 getCocktail();
 
 //function to show meal results
