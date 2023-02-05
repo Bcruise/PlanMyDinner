@@ -111,22 +111,34 @@ body{
     -ms-border-radius: 0.7rem;
     -o-border-radius: 0.7rem;
     overflow-y: scroll;
+    height: calc(100vh - 340px);
 }
+#cocktail-row{
+  overflow-y: scroll;
+    height: calc(100vh - 340px);
+}
+#cocktail-row::-webkit-scrollbar-track,
 #mealInstructions::-webkit-scrollbar-track ,
 .result::-webkit-scrollbar-track {
   border-radius: 10px;
   background-color: transparent;  
 }
+#cocktail-row::-webkit-scrollbar,
 #mealInstructions::-webkit-scrollbar,
 .result::-webkit-scrollbar {
   width: 5px;
   padding-right: 5px;
   background-color: transparent;
 }
+
 #mealInstructions::-webkit-scrollbar-thumb,
 .result::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #8f8e8e5b;
+}
+#cocktail-row::-webkit-scrollbar-thumb{
+  border-radius: 10px;
+  background-color: white;
 }
 .tab-pane {
     width: calc(100vw - 80px);
