@@ -111,6 +111,7 @@ body{
     -ms-border-radius: 0.7rem;
     -o-border-radius: 0.7rem;
     overflow-y: scroll;
+    height: calc(100vh - 340px);
 }
 #mealInstructions::-webkit-scrollbar-track ,
 .result::-webkit-scrollbar-track {
