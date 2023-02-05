@@ -131,11 +131,20 @@ function addIngredientToPage(item) {
     let html =
         `<div class="col">
             <div class="mb-3">
-                <button class="btn btn-light w-100">${item}</button>
+                <button data-button="ingredient" id="${item.replace(/\s+/g, '')}" data-id="${item}" class="btn btn-light w-100">${item}</button>
             </div>
         </div>`;
     //append to container
     ingredientsCont.prepend(html);
+
+}
+function removeIngredient(item){
+   
+    const index = ingredients.indexOf(item);
+    if (index > -1) { // only splice array when item is found
+    ingredients.splice(index, 1); // 2nd parameter means remove one item only
+    }
+    $('#'+item.replace(/\s+/g, '')).remove();
 
 }
 
@@ -234,6 +243,7 @@ function showMeals(data) {
     }
     
 }
+//function to change page style
 function changeStyle(page){
     var tabContent = $('.tab-content');
     if(page == 'cocktail'){
@@ -273,6 +283,11 @@ function clickHandler(button) {
     }
     if (button.data('button') == 'meals') {
         changeStyle('meals');
+    }
+    if (button.data('button') == 'ingredient') {
+        let id = button.data('id');
+        removeIngredient(id);
+        getMeals();
     }
 
 }
