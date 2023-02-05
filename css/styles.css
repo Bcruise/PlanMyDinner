@@ -1,8 +1,9 @@
 body{
-  overflow:hidden;
+  overflow: hidden;
   padding-bottom: 20px;
   font-family: 'Poppins', sans-serif;
 }
+
 .recipe-photo{
   display: flex;
   align-items: center;
@@ -88,7 +89,6 @@ body{
 .jumbotron {
     padding: 2rem 1rem;
     background-color: #e9ecef;
-    background-image: url("../images/drink-ge0da837e9_1920.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
