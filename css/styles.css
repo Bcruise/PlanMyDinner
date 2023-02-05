@@ -92,7 +92,12 @@ body{
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
-  }
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+}
   .display-4   {
     font-size: 6vw !important;
     font-weight: 500 !important;
@@ -117,6 +122,12 @@ body{
   overflow-y: scroll;
     height: calc(100vh - 340px);
     animation-duration: 0.5s;
+  animation-name: animate-fade;
+  animation-delay: 0.2s;
+  animation-fill-mode: backwards;
+}
+#pills-home{
+  animation-duration: 0.5s;
   animation-name: animate-fade;
   animation-delay: 0.2s;
   animation-fill-mode: backwards;
