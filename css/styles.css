@@ -126,6 +126,12 @@ body{
   animation-delay: 0.2s;
   animation-fill-mode: backwards;
 }
+#pills-home{
+  animation-duration: 0.5s;
+  animation-name: animate-fade;
+  animation-delay: 0.2s;
+  animation-fill-mode: backwards;
+}
 #cocktail-row::-webkit-scrollbar-track,
 #mealInstructions::-webkit-scrollbar-track ,
 .result::-webkit-scrollbar-track {
