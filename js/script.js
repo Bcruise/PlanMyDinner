@@ -3,6 +3,15 @@ const ingredientsInput = $('#mealUserInput');
 const mealResultsCont = $('#mealResultsContainer');
 const ingredientsCont = $('#ingredientsContainer');
 const cocktailRow = $('#cocktail-row');
+const jumbotron = $('.jumbotron');
+const display4 = $('.display-4');
+const lead = $('.lead');
+
+
+//set jumbotron image
+jumbotron.css("background-image", "url('../images/banner.png')");
+display4.css("color", "black");
+lead.css("color", "black");
 
 //array to hold user input
 var ingredients = [];
@@ -28,19 +37,6 @@ function getCocktail(id) {
     let baseURL = `https://www.thecocktaildb.com/api/json/v1/1/random.php`;
     getData(baseURL, "Cocktail");
 }
-
-//JS to provide a scroll bar to just the cocktail section
-var pillsProfileTab = $('#pills-profile-tab');
-pillsProfileTab.on('click', function () {
-    if (pillsProfileTab[0].ariaSelected != true) {
-        //$("body").css("overflow", "scroll");
-        console.log(1);
-    } else {
-        //$("body").css("overflow", "hidden");
-        console.log(2);
-        console.log(pillsProfileTab[0].ariaSelected);
-    }
-})
 
 //function to call ajax request
 function getData(queryURL, type) {
@@ -235,6 +231,19 @@ function showMeals(data) {
     
 }
 
+function changeStyle(page){
+    var tabContent = $('.tab-content');
+    
+    if(page == 'cocktail'){
+        tabContent.css("background-image", "linear-gradient(to bottom, rgba(0,0,0,0.9), white 95%)");
+        
+    }
+    if(page == 'meals'){
+        tabContent.css("background-image", "linear-gradient(to bottom, white, white 95%)");
+        
+    }
+}
+
 //function to handle clicks
 function clickHandler(button) {
     //ajax call again for cocktail information
@@ -269,6 +278,16 @@ function clickHandler(button) {
 $('button').on('click', function (event) {
     event.preventDefault();
     clickHandler($(event.target));
+    console.log();
+    if (event.target.innerHTML == 'Give me a Recipe') {
+        jumbotron.css("background-image", "url('../images/banner.png')");
+        display4.css("color", "black");
+        lead.css("color", "black");
+    } else if (event.target.innerHTML == 'Give me a Cocktail') {
+        jumbotron.css("background-image", "url('../images/drink-ge0da837e9_1920.png')");
+        display4.css("color", "white");
+        lead.css("color", "white");
+    }
 });
 
 
