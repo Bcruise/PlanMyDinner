@@ -92,8 +92,15 @@ body{
     background-repeat: no-repeat;
     background-position: top;
     background-size: 100%;
+
   }
 
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+  }
   .display-4   {
     font-size: 6vw !important;
     font-weight: 500 !important;
@@ -112,22 +119,44 @@ body{
     -ms-border-radius: 0.7rem;
     -o-border-radius: 0.7rem;
     overflow-y: scroll;
+    height: calc(100vh - 340px);
 }
+#cocktail-row{
+  overflow-y: scroll;
+    height: calc(100vh - 340px);
+    animation-duration: 0.5s;
+  animation-name: animate-fade;
+  animation-delay: 0.2s;
+  animation-fill-mode: backwards;
+}
+#pills-home{
+  animation-duration: 0.5s;
+  animation-name: animate-fade;
+  animation-delay: 0.2s;
+  animation-fill-mode: backwards;
+}
+#cocktail-row::-webkit-scrollbar-track,
 #mealInstructions::-webkit-scrollbar-track ,
 .result::-webkit-scrollbar-track {
   border-radius: 10px;
   background-color: transparent;  
 }
+#cocktail-row::-webkit-scrollbar,
 #mealInstructions::-webkit-scrollbar,
 .result::-webkit-scrollbar {
   width: 5px;
   padding-right: 5px;
   background-color: transparent;
 }
+
 #mealInstructions::-webkit-scrollbar-thumb,
 .result::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #8f8e8e5b;
+}
+#cocktail-row::-webkit-scrollbar-thumb{
+  border-radius: 10px;
+  background-color: white;
 }
 .tab-pane {
     width: calc(100vw - 80px);
@@ -152,7 +181,7 @@ body{
   margin-top: -17px;
   padding-top: 20px;
   height: 100vh;
-  background-image: linear-gradient(to bottom, rgba(0,0,0,0.9), white 95%);
+ 
 }
 
 .card-container {
@@ -273,4 +302,10 @@ display: none;
   text-decoration: underline;
   text-align: center;
   margin-bottom: 20px;
+}
+
+.text-bottom{
+  position: absolute;
+  bottom: 0px;
+  padding-bottom: 20px;
 }

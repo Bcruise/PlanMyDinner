@@ -127,11 +127,20 @@ function addIngredientToPage(item) {
     let html =
         `<div class="col">
             <div class="mb-3">
-                <button class="btn btn-light w-100">${item}</button>
+                <button data-button="ingredient" id="${item.replace(/\s+/g, '')}" data-id="${item}" class="btn btn-light w-100">${item}</button>
             </div>
         </div>`;
     //append to container
     ingredientsCont.prepend(html);
+
+}
+function removeIngredient(item){
+   
+    const index = ingredients.indexOf(item);
+    if (index > -1) { // only splice array when item is found
+    ingredients.splice(index, 1); // 2nd parameter means remove one item only
+    }
+    $('#'+item.replace(/\s+/g, '')).remove();
 
 }
 
@@ -230,24 +239,21 @@ function showMeals(data) {
     }
     
 }
-
+//function to change page style
 function changeStyle(page){
     var tabContent = $('.tab-content');
-    
     if(page == 'cocktail'){
         tabContent.css("background-image", "linear-gradient(to bottom, rgba(0,0,0,0.9), white 95%)");
         
     }
     if(page == 'meals'){
         tabContent.css("background-image", "linear-gradient(to bottom, white, white 95%)");
-        
     }
 }
 
 //function to handle clicks
 function clickHandler(button) {
-    //ajax call again for cocktail information
-    getCocktail();
+    
     //if add ingridients btn clicked
     if (button.data('button') == 'add' && ingredientsInput.val() != '') {
         //If the ingredient chosen is not in the list of ingredients from API
@@ -266,6 +272,19 @@ function clickHandler(button) {
     if (button.data('button') == 'meal') {
         getRecipe(button.data('id'));
     }
+    //cocktail button pressesd
+    if (button.data('button') == 'cocktail') {
+        changeStyle('cocktail');
+        getCocktail();
+    }
+    if (button.data('button') == 'meals') {
+        changeStyle('meals');
+    }
+    if (button.data('button') == 'ingredient') {
+        let id = button.data('id');
+        removeIngredient(id);
+        getMeals();
+    }
 
 }
 
@@ -275,8 +294,11 @@ function clickHandler(button) {
 
 
 //click listener for all buttons
-$('button').on('click', function (event) {
-    event.preventDefault();
+$('body').on('click', function (event) {
+    //allow default youtube link action
+    if(event.target.id != "youTube"){
+        event.preventDefault();
+    }
     clickHandler($(event.target));
     console.log();
     if (event.target.innerHTML == 'Give me a Recipe') {
@@ -316,3 +338,85 @@ $(function(){
     });
   } );
 
+  changeStyle('meals');
+
+function RecipeOfTheDay(){
+//Add moment js to assign today with id recipe
+var date = moment().format("DD/MM/YYYY");
+
+var recipeToday = [];
+    // Only proceed of there is a data
+    if (localStorage.getItem("record") !== null) {
+        recipeToday = JSON.parse(localStorage.getItem("record"));
+
+        //URL for getting all the recipe set in local storage which has today's date
+        if (recipeToday[0][0] == date){
+            var queryURL = `https://www.themealdb.com/api/json/v2/${apiKey}/lookup.php?i=` + recipeToday[0][1];
+            }
+            else{
+            localStorage.removeItem("record");
+            }
+    }
+    else{
+        //URL for getting all the ingredients
+        var queryURL = "https://themealdb.com/api/json/v1/1/random.php";
+    }
+    
+    
+//Ajax call 
+$.ajax({
+    url: queryURL,
+    method: "GET"
+})
+.then(function(response){
+    let id = response.meals[0].idMeal;
+    let title = response.meals[0].strMeal;
+    let image = response.meals[0].strMealThumb;
+    let area = response.meals[0].strArea;
+    let category = response.meals[0].strCategory;
+    
+    //if there is no record in local storage
+    if(localStorage.getItem("record") === null){
+        //Pushing new details to recipeToday array to store before setting it to local storage
+        recipeToday.push([date, id]);
+        //Set the record in local storage to recipeToday array
+        localStorage.setItem('record', JSON.stringify(recipeToday));
+    }
+    
+    
+    //create html
+    let html =
+    `<h4 class="text-center">Recipe of the Day</h4>
+    <div class="col d-flex justify-content-center">
+        <div class="card m-3" style="max-width: 590px;" data-button="meal" data-id="${id}" 
+        data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
+        <div class="row g-0">
+            <div class="col-md-7">
+            <img
+                src="${image}"
+                alt="${title}"
+                class="img-fluid rounded-start"
+                data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal"
+            />
+            </div>
+            <div class="col-md-5">
+            <div class="card-body">
+                <h5 class="card-title">${title}</h5>
+                <h6 class="card-text">${area} &nbsp; | &nbsp; ${category}</h6>
+                <p class="card-text text-bottom">
+                Get the Recipe >
+                </p>
+            </div>
+            </div>
+        </div>
+    </div>
+    `;
+    //append to container
+    mealResultsCont.append(html);
+    
+});
+
+
+}
+
+RecipeOfTheDay();
