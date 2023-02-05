@@ -45,7 +45,6 @@ function getData(queryURL, type) {
         method: "GET"
     }).then(function (response) {
         if(type == "Meals"){
-            
             showMeals(response);
         }
         if(type == "Cocktail"){
@@ -142,6 +141,7 @@ function removeIngredient(item){
     }
     $('#'+item.replace(/\s+/g, '')).remove();
 
+
 }
 
 //function to add cocktail to page
@@ -231,7 +231,7 @@ function showMeals(data) {
     else{
         let html =
         `<div class="card col-5 m-3 card-one">
-        <img src="/images/no-results-found.png" class="card-img-top" alt="...">
+        <img src="/images/no-results-found.png" class="card-img-top" alt="No results found">
         </div>`;
         //append to container
         mealResultsCont.append(html);
@@ -283,7 +283,13 @@ function clickHandler(button) {
     if (button.data('button') == 'ingredient') {
         let id = button.data('id');
         removeIngredient(id);
-        getMeals();
+        if(ingredients == ""){
+            RecipeOfTheDay();
+        }
+        else{
+            getMeals();
+        }
+        
     }
 
 }
@@ -341,6 +347,7 @@ $(function(){
   changeStyle('meals');
 
 function RecipeOfTheDay(){
+mealResultsCont.html('');
 //Add moment js to assign today with id recipe
 var date = moment().format("DD/MM/YYYY");
 
@@ -358,7 +365,7 @@ var recipeToday = [];
             }
     }
     else{
-        //URL for getting all the ingredients
+        //URL for getting one random recipe
         var queryURL = "https://themealdb.com/api/json/v1/1/random.php";
     }
     
