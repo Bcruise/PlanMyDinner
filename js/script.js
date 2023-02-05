@@ -237,8 +237,7 @@ function showMeals(data) {
 
 //function to handle clicks
 function clickHandler(button) {
-    //ajax call again for cocktail information
-    getCocktail();
+    
     //if add ingridients btn clicked
     if (button.data('button') == 'add' && ingredientsInput.val() != '') {
         //If the ingredient chosen is not in the list of ingredients from API
@@ -257,6 +256,10 @@ function clickHandler(button) {
     if (button.data('button') == 'meal') {
         getRecipe(button.data('id'));
     }
+    //cocktail button pressesd
+    if (button.data('button') == 'cocktail') {
+        getCocktail();
+    }
 
 }
 
@@ -266,8 +269,11 @@ function clickHandler(button) {
 
 
 //click listener for all buttons
-$('button').on('click', function (event) {
-    event.preventDefault();
+$('body').on('click', function (event) {
+    //allow default youtube link action
+    if(event.target.id != "youTube"){
+        event.preventDefault();
+    }
     clickHandler($(event.target));
 });
 
