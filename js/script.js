@@ -308,13 +308,15 @@ $('body').on('click', function (event) {
     clickHandler($(event.target));
     console.log();
     if (event.target.innerHTML == 'Give me a Recipe') {
-        jumbotron.css("background-image", "url('../images/banner.png')");
+        jumbotron.css("background-image", "url('/images/banner.png')");
         display4.css("color", "black");
         lead.css("color", "black");
+        jumbotron.css("background-position","top");
     } else if (event.target.innerHTML == 'Give me a Cocktail') {
-        jumbotron.css("background-image", "url('../images/drink-ge0da837e9_1920.png')");
+        jumbotron.css("background-image", "url('/images/drink-ge0da837e9_1920.png')");
         display4.css("color", "white");
         lead.css("color", "white");
+        jumbotron.css("background-position","center");
     }
 });
 
