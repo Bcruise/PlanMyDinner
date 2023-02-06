@@ -78,13 +78,21 @@ body{
 
 }
 
-/*Media query for devices smaller than tablets 76px and down)*/
+/*Media query for devices bigger than tablets 768px and up)*/
 @media (min-width: 768px) {  
   /*Grey border dividing the modal to recipe details and photo of the recipe*/
   .recipe-details{
     border-right: 2px solid #dbe4ed;
   }
+
+  /*Bottom text in Recipe of the Day to go in the bottom when it's bigger screen*/
+  .text-bottom{
+    position: absolute;
+    bottom: 0px;
+    padding-bottom: 20px;
+  }
 }
+
 
 .jumbotron {
     padding: 2rem 1rem;
@@ -92,9 +100,6 @@ body{
     background-repeat: no-repeat;
     background-position: top;
     background-size: 100%;
-
-  }
-
     transition: all 0.2s ease;
     -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
@@ -304,8 +309,3 @@ display: none;
   margin-bottom: 20px;
 }
 
-.text-bottom{
-  position: absolute;
-  bottom: 0px;
-  padding-bottom: 20px;
-}
