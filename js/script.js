@@ -124,11 +124,12 @@ function addIngredientToPage(item) {
 
     //create html
     let html =
-        `<div class="col">
+        `<div class="col" id="${item.replace(/\s+/g, '')}">
             <div class="mb-3">
-                <button data-button="ingredient" id="${item.replace(/\s+/g, '')}" data-id="${item}" class="btn btn-light w-100">${item}</button>
+                <button data-button="ingredient"  data-id="${item}" class="btn btn-light w-100 buttonIngredient">${item}<i class="fa fa-times x-icon" aria-hidden="true"></i></button>
             </div>
         </div>`;
+
     //append to container
     ingredientsCont.prepend(html);
 

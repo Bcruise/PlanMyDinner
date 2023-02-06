@@ -309,3 +309,22 @@ display: none;
   margin-bottom: 20px;
 }
 
+
+/* To set icon at the right side of the div*/
+.x-icon {
+  margin-left: 10px;
+  float: right;
+  pointer-events: none;
+}
+
+.buttonIngredient{
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+}
+
+.buttonIngredient:hover{
+  transform: scale(1.1);
+}
