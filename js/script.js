@@ -230,8 +230,8 @@ function showMeals(data) {
     //If there is no result then show this card with this img src
     else{
         let html =
-        `<div class="card col-sm-8 col-md-5 col-lg-3 m-3 card-one">
-        <img src="/images/No-results-found-carrot.png" class="card-img-top" alt="No results found">
+        `<div class="card col-sm-8 col-md-9 col-lg-5 m-3 card-one">
+        <img src="images/No-results-found-carrot.png" class="card-img-top" alt="No results found">
         </div>`;
         //append to container
         mealResultsCont.append(html);
