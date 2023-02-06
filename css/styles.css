@@ -90,14 +90,17 @@ body{
     padding: 2rem 1rem;
     background-color: #e9ecef;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: top;
     background-size: 100%;
+
+  }
+
     transition: all 0.2s ease;
     -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
     -ms-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
-}
+  }
   .display-4   {
     font-size: 6vw !important;
     font-weight: 500 !important;
