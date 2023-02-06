@@ -13,6 +13,8 @@ jumbotron.css("background-image", "url('../images/banner.png')");
 display4.css("color", "black");
 lead.css("color", "black");
 
+//testimonials button
+
 //array to hold user input
 var ingredients = [];
 //array to hold all the ingredients name
