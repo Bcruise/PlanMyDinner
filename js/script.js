@@ -9,7 +9,7 @@ const lead = $('.lead');
 
 
 //set jumbotron image
-jumbotron.css("background-image", "url('../images/banner.png')");
+jumbotron.css("background-image", "url('images/Banner.png')");
 display4.css("color", "black");
 lead.css("color", "black");
 
