@@ -170,6 +170,10 @@ section.testimonials .testimonial-item img {
   background-color: transparent;
 }
 
+
+
+
+
 #mealInstructions::-webkit-scrollbar-thumb,
 .result::-webkit-scrollbar-thumb {
   border-radius: 10px;
@@ -329,4 +333,23 @@ display: none;
   position: absolute;
   bottom: 0px;
   padding-bottom: 20px;
+}
+#movie-row{
+  display: flex;
+  justify-content: center;
+  
+}
+.moviePoster{
+  height: 350px;
+  width: 350px;
+  margin: 20px;
+  margin-left: 100px;
+}
+
+#movie-title{
+  text-align: center;
+  font-weight: 700;
+  font-size: large;
+  border-bottom: 1px solid black;
+  margin: 10px;
 }

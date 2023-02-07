@@ -6,6 +6,7 @@ const cocktailRow = $('#cocktail-row');
 const jumbotron = $('.jumbotron');
 const display4 = $('.display-4');
 const lead = $('.lead');
+const movieRow = $('#movie-row')
 
 
 //set jumbotron image
@@ -42,6 +43,36 @@ function getCocktail(id) {
     let baseURL = `https://www.thecocktaildb.com/api/json/v1/1/random.php`;
     getData(baseURL, "Cocktail");
 }
+
+
+$("#pills-movie-tab").on("click", function(){
+    $.ajax({
+        url: "https://api.themoviedb.org/3/movie/top_rated?api_key=7a89e1124366927aa9fab707a64ea749",
+
+        method: "GET"
+    }).then(function(data){
+         console.log(data)
+         let randomIndex = Math.floor(Math.random() * data.results.length);
+         let randomMovie = data.results[randomIndex];
+         $('#movie-title').text(randomMovie.title);
+         $('#movie-rating').text("Rate: " + randomMovie.vote_average);
+         $('#movie-overview').text(randomMovie.overview)
+         let posterPath = randomMovie.poster_path;
+        let posterUrl = 'https://image.tmdb.org/t/p/w154/' + posterPath;
+        
+        $('#movie-poster').attr('src', posterUrl);
+
+        //movieRow.text(averageRating)
+    })
+
+})
+          
+        
+
+        
+ 
+
+
 
 //function to call ajax request
 function getData(queryURL, type) {
@@ -149,6 +180,7 @@ function removeIngredient(item){
 
 }
 
+
 //function to add cocktail to page
 
 function showCocktail (data) {
@@ -204,6 +236,9 @@ function showCocktail (data) {
 // pushing of cocktail information onto page
 getCocktail();
 
+
+
+
 //function to show meal results
 function showMeals(data) {
 
@@ -244,6 +279,11 @@ function showMeals(data) {
     }
     
 }
+
+//function to show movie
+
+
+
 //function to change page style
 function changeStyle(page){
     var tabContent = $('.tab-content');
@@ -254,6 +294,7 @@ function changeStyle(page){
     if(page == 'meals'){
         tabContent.css("background-image", "linear-gradient(to bottom, white, white 95%)");
     }
+    
 }
 
 //function to handle clicks
