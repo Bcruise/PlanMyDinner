@@ -9,7 +9,7 @@ const lead = $('.lead');
 
 
 //set jumbotron image
-jumbotron.css("background-image", "url('../images/banner.png')");
+jumbotron.css("background-image", "url('images/Banner.png')");
 display4.css("color", "black");
 lead.css("color", "black");
 
@@ -45,7 +45,6 @@ function getData(queryURL, type) {
         method: "GET"
     }).then(function (response) {
         if(type == "Meals"){
-            
             showMeals(response);
         }
         if(type == "Cocktail"){
@@ -125,11 +124,12 @@ function addIngredientToPage(item) {
 
     //create html
     let html =
-        `<div class="col">
+        `<div class="col" id="${item.replace(/\s+/g, '')}">
             <div class="mb-3">
-                <button data-button="ingredient" id="${item.replace(/\s+/g, '')}" data-id="${item}" class="btn btn-light w-100">${item}</button>
+                <button data-button="ingredient"  data-id="${item}" class="btn btn-light w-100 buttonIngredient">${item}<i class="fa fa-times x-icon" aria-hidden="true"></i></button>
             </div>
         </div>`;
+
     //append to container
     ingredientsCont.prepend(html);
 
@@ -141,6 +141,7 @@ function removeIngredient(item){
     ingredients.splice(index, 1); // 2nd parameter means remove one item only
     }
     $('#'+item.replace(/\s+/g, '')).remove();
+
 
 }
 
@@ -230,8 +231,8 @@ function showMeals(data) {
     //If there is no result then show this card with this img src
     else{
         let html =
-        `<div class="card col-5 m-3 card-one">
-        <img src="/images/no-results-found.png" class="card-img-top" alt="...">
+        `<div class="card col-sm-8 col-md-9 col-lg-5 m-3 card-one">
+        <img src="images/No-results-found-carrot.png" class="card-img-top" alt="No results found">
         </div>`;
         //append to container
         mealResultsCont.append(html);
@@ -266,6 +267,7 @@ function clickHandler(button) {
             addIngredientToPage(item);
             ingredientsInput.val('');
             getMeals();
+            storeIngredients();
         }
     }
     //if meal item clicked
@@ -283,7 +285,14 @@ function clickHandler(button) {
     if (button.data('button') == 'ingredient') {
         let id = button.data('id');
         removeIngredient(id);
-        getMeals();
+        storeIngredients();
+        if(ingredients == ""){
+            RecipeOfTheDay();
+        }
+        else{
+            getMeals();
+        }
+        
     }
 
 }
@@ -305,21 +314,29 @@ $('body').on('click', function (event) {
 
     console.log();
     if (event.target.innerHTML == 'Give me a Recipe') {
-        jumbotron.css("background-image", "url('../images/banner.png')");
+        jumbotron.css("background-image", "url('images/Banner.png')");
         display4.css("color", "black");
         lead.css("color", "black");
+<<<<<<< HEAD
         $('#mealInstructions').css("overflow-y", "auto");
         $('.cocktail-row').css("overflow-y", "hidden");
         $('.result').css("overflow-y", "hidden");
         $('body').css("overflow-y", "hidden");
+=======
+        jumbotron.css("background-position","top");
+>>>>>>> 0ce2e98574c388c73c8957d35cbcc565e014bb98
     } else if (event.target.innerHTML == 'Give me a Cocktail') {
-        jumbotron.css("background-image", "url('../images/drink-ge0da837e9_1920.png')");
+        jumbotron.css("background-image", "url('images/drink-ge0da837e9_1920.png')");
         display4.css("color", "white");
         lead.css("color", "white");
+<<<<<<< HEAD
         $('#mealInstructions').css("overflow-y", "unset");
         $('.cocktail-row').css("overflow-y", "unset");
         $('.result').css("overflow-y", "unset");
         $('body').css("overflow-y", "unset");
+=======
+        jumbotron.css("background-position","center");
+>>>>>>> 0ce2e98574c388c73c8957d35cbcc565e014bb98
     }
 });
 
@@ -352,6 +369,7 @@ $(function(){
   changeStyle('meals');
 
 function RecipeOfTheDay(){
+mealResultsCont.html('');
 //Add moment js to assign today with id recipe
 var date = moment().format("DD/MM/YYYY");
 
@@ -369,7 +387,7 @@ var recipeToday = [];
             }
     }
     else{
-        //URL for getting all the ingredients
+        //URL for getting one random recipe
         var queryURL = "https://themealdb.com/api/json/v1/1/random.php";
     }
     
@@ -390,7 +408,7 @@ $.ajax({
     if(localStorage.getItem("record") === null){
         //Pushing new details to recipeToday array to store before setting it to local storage
         recipeToday.push([date, id]);
-        //Set the record in local storage to recipeToday array
+        //Set the record in local storage from recipeToday array
         localStorage.setItem('record', JSON.stringify(recipeToday));
     }
     
@@ -401,7 +419,7 @@ $.ajax({
     <div class="col d-flex justify-content-center">
         <div class="card m-3" style="max-width: 590px;" data-button="meal" data-id="${id}" 
         data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
-        <div class="row g-0">
+        <div class="row g-0" data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
             <div class="col-md-7">
             <img
                 src="${image}"
@@ -410,7 +428,7 @@ $.ajax({
                 data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal"
             />
             </div>
-            <div class="col-md-5">
+            <div class="col-md-5" data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
             <div class="card-body">
                 <h5 class="card-title">${title}</h5>
                 <h6 class="card-text">${area} &nbsp; | &nbsp; ${category}</h6>
@@ -426,12 +444,11 @@ $.ajax({
     mealResultsCont.append(html);
     
 });
-
-
 }
 
 RecipeOfTheDay();
 
+<<<<<<< HEAD
 //Function to scroll the footer
 
 function scrollTheFooter() {
@@ -444,3 +461,30 @@ function scrollTheFooter() {
 
 document.querySelector('.result').onscroll = function () { scrollTheFooter() };
 document.querySelector('#cocktail-row').onscroll = function () { scrollTheFooter() };
+=======
+//Store selected ingredients to Local Sotrage
+function storeIngredients(){
+    //Set the savedIngredients in local storage from ingredients array
+    localStorage.setItem('savedIngredients', JSON.stringify(ingredients));
+}
+
+//Display ingredients that are in local storage
+function displayStoredIngredients(){
+
+    // Only proceed of there is a data
+    if (localStorage.getItem("savedIngredients") !== null) {
+        ingredients = JSON.parse(localStorage.getItem("savedIngredients"));
+    }
+    //For loop to get each ingredients on item and pass to function
+    if(ingredients) {
+        for (let i = 0; i <ingredients.length; i++){
+            let item = ingredients[i];
+            addIngredient(item);
+            addIngredientToPage(item);
+            getMeals();
+        }
+    }
+}
+
+displayStoredIngredients();
+>>>>>>> 0ce2e98574c388c73c8957d35cbcc565e014bb98
