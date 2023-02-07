@@ -267,6 +267,7 @@ function clickHandler(button) {
             addIngredientToPage(item);
             ingredientsInput.val('');
             getMeals();
+            storeIngredients();
         }
     }
     //if meal item clicked
@@ -284,6 +285,7 @@ function clickHandler(button) {
     if (button.data('button') == 'ingredient') {
         let id = button.data('id');
         removeIngredient(id);
+        storeIngredients();
         if(ingredients == ""){
             RecipeOfTheDay();
         }
@@ -389,7 +391,7 @@ $.ajax({
     if(localStorage.getItem("record") === null){
         //Pushing new details to recipeToday array to store before setting it to local storage
         recipeToday.push([date, id]);
-        //Set the record in local storage to recipeToday array
+        //Set the record in local storage from recipeToday array
         localStorage.setItem('record', JSON.stringify(recipeToday));
     }
     
@@ -425,8 +427,32 @@ $.ajax({
     mealResultsCont.append(html);
     
 });
-
-
 }
 
 RecipeOfTheDay();
+
+//Store selected ingredients to Local Sotrage
+function storeIngredients(){
+    //Set the savedIngredients in local storage from ingredients array
+    localStorage.setItem('savedIngredients', JSON.stringify(ingredients));
+}
+
+//Display ingredients that are in local storage
+function displayStoredIngredients(){
+
+    // Only proceed of there is a data
+    if (localStorage.getItem("savedIngredients") !== null) {
+        ingredients = JSON.parse(localStorage.getItem("savedIngredients"));
+    }
+    //For loop to get each ingredients on item and pass to function
+    if(ingredients) {
+        for (let i = 0; i <ingredients.length; i++){
+            let item = ingredients[i];
+            addIngredient(item);
+            addIngredientToPage(item);
+            getMeals();
+        }
+    }
+}
+
+displayStoredIngredients();
