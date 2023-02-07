@@ -1,6 +1,5 @@
 body{
   overflow: hidden;
-  padding-bottom: 20px;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -90,7 +89,7 @@ body{
     padding: 2rem 1rem;
     background-color: #e9ecef;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: top;
     background-size: 100%;
     transition: all 0.2s ease;
     -webkit-transition: all 0.2s ease;
@@ -305,4 +304,24 @@ display: none;
   position: absolute;
   bottom: 0px;
   padding-bottom: 20px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  color: white;
+  position: sticky;
+  bottom: 0;
+  transition: all 0.5s ease;
+}
+
+.websiteName {
+  font-size: 20px;
+  height: 100%;
+}
+
+.nameContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

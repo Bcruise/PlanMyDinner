@@ -300,15 +300,26 @@ $('body').on('click', function (event) {
         event.preventDefault();
     }
     clickHandler($(event.target));
+
+
+
     console.log();
     if (event.target.innerHTML == 'Give me a Recipe') {
         jumbotron.css("background-image", "url('../images/banner.png')");
         display4.css("color", "black");
         lead.css("color", "black");
+        $('#mealInstructions').css("overflow-y", "auto");
+        $('.cocktail-row').css("overflow-y", "hidden");
+        $('.result').css("overflow-y", "hidden");
+        $('body').css("overflow-y", "hidden");
     } else if (event.target.innerHTML == 'Give me a Cocktail') {
         jumbotron.css("background-image", "url('../images/drink-ge0da837e9_1920.png')");
         display4.css("color", "white");
         lead.css("color", "white");
+        $('#mealInstructions').css("overflow-y", "unset");
+        $('.cocktail-row').css("overflow-y", "unset");
+        $('.result').css("overflow-y", "unset");
+        $('body').css("overflow-y", "unset");
     }
 });
 
@@ -420,3 +431,16 @@ $.ajax({
 }
 
 RecipeOfTheDay();
+
+//Function to scroll the footer
+
+function scrollTheFooter() {
+    if (document.querySelector('.result').scrollTop > 10 || document.querySelector('#cocktail-row').scrollTop > 10) {
+        document.querySelector('#footer').style.bottom = "-100px";
+    } else {
+        document.querySelector('#footer').style.bottom = "0";
+    }
+}
+
+document.querySelector('.result').onscroll = function () { scrollTheFooter() };
+document.querySelector('#cocktail-row').onscroll = function () { scrollTheFooter() };
