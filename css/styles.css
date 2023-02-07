@@ -24,6 +24,10 @@ body{
   column-count: 3;
   font-size: 14px;
 }
+.container{
+
+  margin-left: 30px;
+}
 .measure{
   font-weight: 500;
 }
@@ -95,7 +99,7 @@ body{
 
 
 .jumbotron {
-    padding: 2rem 1rem;
+    padding: 10px 10px;
     background-color: #e9ecef;
     background-repeat: no-repeat;
     background-position: top;
@@ -113,9 +117,12 @@ body{
   }
 
   .lead{
+    
+    margin-top: -10px;
     font-size: 3vw !important;
-    font-weight: 250 !important;
+    font-weight: light !important;
     color: white;
+    
   }
   .result {
     border-radius: 0.7rem;
@@ -203,7 +210,6 @@ body{
   -o-border-radius: 0.4rem;
 }
 .card{
-  
   transition: all 0.5s ease;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
