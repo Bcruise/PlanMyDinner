@@ -397,7 +397,8 @@ $.ajax({
     //create html
     let html =
     `<h4 class="text-center">Recipe of the Day</h4>
-    <div class="col d-flex justify-content-center">
+    <div class="col d-flex justify-content-center" data-button="meal" data-id="${id}" 
+    data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
         <div class="card m-3" style="max-width: 590px;" data-button="meal" data-id="${id}" 
         data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
         <div class="row g-0">
