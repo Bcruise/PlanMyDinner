@@ -397,11 +397,10 @@ $.ajax({
     //create html
     let html =
     `<h4 class="text-center">Recipe of the Day</h4>
-    <div class="col d-flex justify-content-center" data-button="meal" data-id="${id}" 
-    data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
+    <div class="col d-flex justify-content-center">
         <div class="card m-3" style="max-width: 590px;" data-button="meal" data-id="${id}" 
         data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
-        <div class="row g-0">
+        <div class="row g-0" data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
             <div class="col-md-7">
             <img
                 src="${image}"
@@ -410,7 +409,7 @@ $.ajax({
                 data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal"
             />
             </div>
-            <div class="col-md-5">
+            <div class="col-md-5" data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
             <div class="card-body">
                 <h5 class="card-title">${title}</h5>
                 <h6 class="card-text">${area} &nbsp; | &nbsp; ${category}</h6>
