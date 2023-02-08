@@ -31,17 +31,24 @@ body{
 .measure{
   font-weight: 500;
 }
+.youTube{
+  background-image: url('../images/youTube.jpg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  pointer-events: all;
+}
+.noYouTube{
+  background-image: url('');
+  pointer-events: none;
+}
 #youTube{
   display: flex;
   align-items: center;
   justify-content: right;
   height: 40px;
   width: 130px;
-  cursor: pointer;
-  background-image: url('../images/youTube.jpg');
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 0.5s ease;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;

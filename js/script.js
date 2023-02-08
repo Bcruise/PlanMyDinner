@@ -108,11 +108,19 @@ function popModal(data) {
     }
 
     //set elements in modal
+    $('#youTube').attr('class', 'youTube');
     title.html(data.meals[0].strMeal);
     instructions.html(data.meals[0].strInstructions.replace(/\./g,'.<br/>'));
     ingredients.html(ingredientList);
     image.attr('src',data.meals[0].strMealThumb);
     youTube.attr('href', data.meals[0].strYoutube);
+
+    if( data.meals[0].strYoutube == ""){
+    
+        $('#youTube').attr('class', 'noYouTube');
+
+        
+    }
 
 
     
