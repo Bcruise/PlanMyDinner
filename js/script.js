@@ -31,7 +31,6 @@ function getRecipe(id) {
     getData(baseURL, 'Recipe');
 }
 
-
 //function to get cocktails details
 function getCocktail(id) {
     let baseURL = `https://www.thecocktaildb.com/api/json/v1/1/random.php`;
@@ -56,12 +55,7 @@ function getData(queryURL, type) {
 
             popModal(response);
         }
-
-        //testing
-        // console.log(type);
-         console.log(response);
     });
-
 }
 
 //function to store and add to page from user input
@@ -71,8 +65,6 @@ function addIngredient(item) {
         //add to array
         ingredients.push(item);
     }
-
-
 }
 //function to open model and populate
 function popModal(data) {
@@ -116,20 +108,13 @@ function popModal(data) {
     youTube.attr('href', data.meals[0].strYoutube);
 
     if( data.meals[0].strYoutube == ""){
-    
         $('#youTube').attr('class', 'noYouTube');
-
-        
     }
 
-
-    
 }
 
 //function to add ingredient to page
-
 function addIngredientToPage(item) {
-
     //create html
     let html =
         `<div class="col" id="${item.replace(/\s+/g, '')}">
@@ -140,21 +125,17 @@ function addIngredientToPage(item) {
 
     //append to container
     ingredientsCont.prepend(html);
-
 }
+
 function removeIngredient(item){
-   
     const index = ingredients.indexOf(item);
     if (index > -1) { // only splice array when item is found
     ingredients.splice(index, 1); // 2nd parameter means remove one item only
     }
     $('#'+item.replace(/\s+/g, '')).remove();
-
-
 }
 
 //function to add cocktail to page
-
 function showCocktail (data) {
     
     cocktailRow.html('');
@@ -248,6 +229,7 @@ function showMeals(data) {
     }
     
 }
+
 //function to change page style
 function changeStyle(page){
     var tabContent = $('.tab-content');
@@ -306,11 +288,6 @@ function clickHandler(button) {
 
 }
 
-//testing
-// getMeals();
-// getRecipe('52772');
-
-
 //click listener for all buttons
 $('body').on('click', function (event) {
     //allow default youtube link action
@@ -332,8 +309,6 @@ $('body').on('click', function (event) {
     }
 });
 
-
-
 //URL for getting all the ingredients
 var queryURL = "https://themealdb.com/api/json/v1/1/list.php?i=list";
 
@@ -348,7 +323,6 @@ $.ajax({
     {
         ingredientsName.push(response.meals[i].strIngredient)
     }
-    
 });
 
 //JQuery UI Autocomplete with the lists
@@ -358,7 +332,7 @@ $(function(){
     });
   } );
 
-  changeStyle('meals');
+changeStyle('meals');
 
 function RecipeOfTheDay(){
 mealResultsCont.html('');
@@ -433,11 +407,8 @@ $.ajax({
     `;
     //append to container
     mealResultsCont.append(html);
-    
 });
 }
-
-RecipeOfTheDay();
 
 //Store selected ingredients to Local Sotrage
 function storeIngredients(){
@@ -475,3 +446,9 @@ function scrollTheFooter() {
 
 document.querySelector('.result').onscroll = function () { scrollTheFooter() };
 document.querySelector('#cocktail-row').onscroll = function () { scrollTheFooter() };
+
+//Call function only if ingredient is empty
+if(ingredients == "")
+{
+ RecipeOfTheDay();
+}
