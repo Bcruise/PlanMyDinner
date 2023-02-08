@@ -259,7 +259,8 @@ function clickHandler(button) {
     if (button.data('button') == 'add' && ingredientsInput.val() != '') {
         //If the ingredient chosen is not in the list of ingredients from API
         if (!ingredientsName.includes(ingredientsInput.val())){
-            ingredientsInput.val('Sorry ingredient not available');
+            ingredientsInput.val('');
+            ingredientsInput.attr("placeholder", "Sorry ingredient not available");
         }
         else{
             let item = ingredientsInput.val()
@@ -395,7 +396,6 @@ $.ajax({
         localStorage.setItem('record', JSON.stringify(recipeToday));
     }
     
-    
     //create html
     let html =
     `<h4 class="text-center">Recipe of the Day</h4>
@@ -412,10 +412,10 @@ $.ajax({
             />
             </div>
             <div class="col-md-5" data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
-            <div class="card-body">
-                <h5 class="card-title">${title}</h5>
-                <h6 class="card-text">${area} &nbsp; | &nbsp; ${category}</h6>
-                <p class="card-text text-bottom">
+            <div class="card-body" data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
+                <h5 class="card-title" data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">${title}</h5>
+                <h6 class="card-text" data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">${area} &nbsp; | &nbsp; ${category}</h6>
+                <p class="card-text text-bottom" data-button="meal" data-id="${id}" data-bs-toggle="modal" data-bs-target="#ViewRecipeModal">
                 Get the Recipe >
                 </p>
             </div>
