@@ -456,3 +456,14 @@ function displayStoredIngredients(){
 }
 
 displayStoredIngredients();
+
+function scrollTheFooter() {
+    if (document.querySelector('.result').scrollTop > 10 || document.querySelector('#cocktail-row').scrollTop > 10) {
+        document.querySelector('#footer').style.bottom = "-100px";
+    } else {
+        document.querySelector('#footer').style.bottom = "0";
+    }
+}
+
+document.querySelector('.result').onscroll = function () { scrollTheFooter() };
+document.querySelector('#cocktail-row').onscroll = function () { scrollTheFooter() };
